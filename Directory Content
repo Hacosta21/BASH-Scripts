@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Check if the user provided a directory path as an argument
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <directory>"
+  exit 1
+fi
+
+# Get the directory path from the command line argument
+directory="$1"
+
+# Check if the specified path is a directory
+if [ ! -d "$directory" ]; then
+  echo "Error: '$directory' is not a directory."
+  exit 1
+fi
+
+# List all files and subdirectories in the specified directory
+echo "Contents of $directory:"
+for entry in "$directory"/*; do
+  if [ -f "$entry" ]; then
+    echo "File: $entry"
+  elif [ -d "$entry" ]; then
+    echo "Directory: $entry"
+  else
+    echo "Unknown type: $entry"
+  fi
+done
